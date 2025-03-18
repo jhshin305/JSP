@@ -1,34 +1,29 @@
-#include <Wire.h>
+String s;
+const int ledPin = 13;
 
 void setup() {
   // put your setup code here, to run once:
+  pinMode(ledPin, OUTPUT);
   Serial.begin(9600);
-  Wire.begin();
-  Serial.println("Scanning for I2C devices...");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  byte error, address;
-  int nDevices = 0;
-
-  for(address = 1; address < 127; address++) {
-    Wire.beginTransmission(address);
-    error = Wire.endTransmission();
-
-    if(error == 0) {
-      Serial.print("I2C device found at address 0x");
-      Serial.print(address, HEX);
-      Serial.println(" !");
-      nDevices++;
+  if(Serial.available() > 0) {
+    char c;
+    c = Serial.read();
+    if(c == '\n') {
+      if( s=="on") {
+        digitalWrite(ledPin, HIGH);
+        Serial.print("led = on\n");
+        s="";
+      }
+      else if(s == "off") {
+        digitalWrite(ledPin, LOW);
+        Serial.print("led = off\n");
+        s="";
+      }
     }
+    else s+=c;
   }
-
-  if(nDevices == 0) {
-    Serial.println("No I2C devices found.");
-  }
-  else {
-    Serial.println("Scan complete");
-  }
-  delay(5000);
 }
