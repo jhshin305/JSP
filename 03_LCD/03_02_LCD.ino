@@ -1,1 +1,0 @@
-const int buttonPin = 2;
