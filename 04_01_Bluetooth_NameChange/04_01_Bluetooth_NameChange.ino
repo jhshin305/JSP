@@ -8,6 +8,17 @@ void setup() {
   Serial.begin(9600);
   bluetooth.begin(9600);
 
-	delay(1000);
-	bluetooth.print("AT+NAME=MyBT");
+delay(1000);
+	bluetooth.print("HC-06 AT 모드 테스트 시작"); 
+}
+
+void loop() {
+  if(bluetooth.available()) {
+	char c = bluetooth.read();
+	Serial.write(c);
+  }
+  if(Serial.available()) {
+	char c = Serial.read();
+	bluetooth.write(c);
+  }
 }
