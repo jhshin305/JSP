@@ -2,9 +2,9 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-#define BT_RXD 10
-#define BT_TXD 11
-liquidCrystal_I2C lcd(0x27, 16, 2);
+#define BT_RXD 3
+#define BT_TXD 2
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 SoftwareSerial bluetooth(BT_RXD, BT_TXD);
 
 void setup() {
@@ -28,5 +28,8 @@ void loop() {
 		}
 		lcd.setCursor(0, 0);
 		lcd.print(str);
+
+
+		Serial.println("Received via Bluetooth: " + str);
 	}
 }
