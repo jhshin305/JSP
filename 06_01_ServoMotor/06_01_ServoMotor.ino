@@ -1,8 +1,8 @@
-#incldue <Servo.h>
+#include <Servo.h>
 
 Servo servo;
 
-int servo_pin = 7;
+int servo_pin = 2;
 
 void setup() {
 	servo.attach(servo_pin);
