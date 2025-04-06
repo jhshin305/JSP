@@ -108,7 +108,7 @@ int main(void) {
 	
 	curl = curl_easy_init();
 	if(curl) {
-		curl_easy_setopt(curl, CURLOPT_URL, "api.openweathermap.org/data/2.5/weather?lat=37&lon=127&appid=f44f4c06e39d29b08955f712c9f8d25b");
+		curl_easy_setopt(curl, CURLOPT_URL, "api.openweathermap.org/data/2.5/weather?lat=37&lon=127&appid=apikey");
 		//In case of redirection, follow it
 		curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
 		curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
