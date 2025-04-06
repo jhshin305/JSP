@@ -1,29 +1,33 @@
-String s;
-const int ledPin = 13;
+#include <SoftwareSerial.h>
+
+#define BT_RXD 3
+#define BT_TXD 2
+SoftwareSerial bluetooth(BT_RXD, BT_TXD);
+
+char c;
+int ledpin = 13;
 
 void setup() {
-  // put your setup code here, to run once:
-  pinMode(ledPin, OUTPUT);
-  Serial.begin(9600);
+	Serial.begin(9600);
+	bluetooth.begin(9600);
+	pinMode(ledpin, OUTPUT);
+	delay(1000);
+	Serial.println("HC-06 AT 모드 테스트 시작");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  if(Serial.available() > 0) {
-    char c;
-    c = Serial.read();
-    if(c == '\n') {
-      if( s=="on") {
-        digitalWrite(ledPin, HIGH);
-        Serial.print("led = on\n");
-        s="";
-      }
-      else if(s == "off") {
-        digitalWrite(ledPin, LOW);
-        Serial.print("led = off\n");
-        s="";
-      }
-    }
-    else s+=c;
-  }
+	if(bluetooth.available()) {
+		c = bluetooth.read();
+		Serial.println(c);
+		switch (c)
+		{
+		case '0':
+			digitalWrite(ledpin, LOW);
+			break;
+		
+		case '1':
+			digitalWrite(ledpin, HIGH);
+			break;
+		}
+	}
 }

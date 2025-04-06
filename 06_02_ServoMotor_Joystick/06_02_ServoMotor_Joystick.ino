@@ -1,7 +1,7 @@
 #include <Servo.h>
 
 Servo servo;
-int servo_pin = 7;
+int servo_pin = 2;
 int motor_degree = 0;
 
 int VRx = A0;
@@ -24,6 +24,6 @@ void loop() {
 
 	if(motor_degree < 0) motor_degree = 0;
 	if(motor_degree > 180) motor_degree = 180;
-
+  
 	servo.write(motor_degree);
 }
