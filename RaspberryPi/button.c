@@ -1,7 +1,7 @@
 #include <wiringPi.h>
 #include <stdio.h>
 
-#define ButtonPin 17
+#define ButtonPin 7
 
 int main(void) {
     if (wiringPiSetup() == -1) {
